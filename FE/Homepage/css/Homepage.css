@@ -81,5 +81,64 @@ body
     }
 
   }
+.main-label{
+    text-align: center;
+  }
+
+.body-container p{
+    align-items: center;
+  }
+img{
+    max-width: 25%;
+    float: inline-start;
+  }
+.body-container img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    flex-basis: auto;
+  }
+
+.body-button{
+    border-radius: 4px;
+    background-color: #777373;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 25px;
+    padding: 20px;
+    width: 480px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+    
+  }
+
+  .body-button span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+.body-button span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.body-button:hover span{
+    padding-right: 25px;
+}
+
+.body-button:hover span:after{
+    opacity: 1;
+    right: 0;
+}
   
 
