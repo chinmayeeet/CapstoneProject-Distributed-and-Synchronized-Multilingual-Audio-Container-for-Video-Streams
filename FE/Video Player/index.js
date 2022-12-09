@@ -1,9 +1,10 @@
 
 const video = document.getElementById('video');
+const audioKan = document.getElementById('audioKan');
+const audioHin = document.getElementById('audioHin');
 const videoControls = document.getElementById('video-controls');
 const playButton = document.getElementById('play');
 const playbackIcons = document.querySelectorAll('.playback-icons use');
-const videoWorks = !!document.createElement('video').canPlayType;
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
 const progressBar = document.getElementById('progress-bar');
@@ -16,20 +17,17 @@ const volumeLow = document.querySelector('use[href="#volume-low"]');
 const volumeHigh = document.querySelector('use[href="#volume-high"]');
 const volume = document.getElementById('volume');
 const playbackAnimation = document.getElementById('playback-animation');
-const audio = document.getElementById('audio-button');
-const english = document.querySelector("[href='#english']");
-const kannada = document.querySelector("[href='#kannada']");
-const telugu = document.querySelector("[href='#telugu']");
-
-var engv = "shapes.mp4"
-var kanv = "newdub.mp4"
-var telv = "new.mp4"
 
 
+
+
+const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
   video.controls = false;
   videoControls.classList.remove('hidden');
 }
+
+
 
 function togglePlay() {
     if (video.paused || video.ended) {
@@ -62,19 +60,7 @@ function togglePlay() {
     };
   };
 
-  function initializeVideo() {
-    const videoDuration = Math.round(video.duration);
-    const time = formatTime(videoDuration);
-    duration.innerText = `${time.minutes}:${time.seconds}`;
-    duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
-  }
-
-  function updateTimeElapsed() {
-    const time = formatTime(Math.round(video.currentTime));
-    timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
-    timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
-  }
-
+  //sets the video duration, and maximum value of the progrss bar
   function initializeVideo() {
     const videoDuration = Math.round(video.duration);
     seek.setAttribute('max', videoDuration);
@@ -83,14 +69,27 @@ function togglePlay() {
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
   }
+  
+  //indicates how far through the video the current playback is by updating the timeElapsed element
+  function updateTimeElapsed() {
+    const time = formatTime(Math.round(video.currentTime));
+    timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
+    timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
+  }
 
+  
+  //indicates how far through the video the current playback is by updating the progress bar
   function updateProgress() {
     seek.value = Math.floor(video.currentTime);
     progressBar.value = Math.floor(video.currentTime);
   }
 
+  //uses the position of the mouse on the progress bar to roughly work out what point in the video the user will skip to if the progress bar is clicked at that point
   function updateSeekTooltip(event) {
-    const skipTo = Math.round((event.offsetX / event.target.clientWidth) * parseInt(event.target.getAttribute('max'), 10));
+    const skipTo = Math.round(
+      (event.offsetX / event.target.clientWidth) * parseInt(event.target.getAttribute('max'), 10)
+    );
+    
     seek.setAttribute('data-seek', skipTo)
     const t = formatTime(skipTo);
     seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
@@ -98,9 +97,14 @@ function togglePlay() {
     seekTooltip.style.left = `${event.pageX - rect.left}px`;
   }
 
+
+
+  //jumps to a different point in the video when the progress bar is clicked
   function skipAhead(event) {
     const skipTo = event.target.dataset.seek ? event.target.dataset.seek : event.target.value;
     video.currentTime = skipTo;
+    audioKan.currentTime = skipTo;
+    audioHin.currentTime = skipTo;
     progressBar.value = skipTo;
     seek.value = skipTo;
   }
@@ -155,18 +159,8 @@ function togglePlay() {
     });
   }
 
-  function audioChange() {
-    var x = document.getElementById("audio-menu");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
 
-  function audioEnglish() {
-    
-  }
+
 
 // Add eventlisteners here
 playButton.addEventListener('click', togglePlay);
@@ -182,25 +176,4 @@ video.addEventListener('volumechange', updateVolumeIcon);
 volumeButton.addEventListener('click', toggleMute);
 video.addEventListener('click', togglePlay);
 video.addEventListener('click', animatePlayback);
-audio.addEventListener('click', audioChange);
 
-english.addEventListener("click", function(event) {
-  video.pause();
-  video.setAttribute('src', engv);
-  video.load();
-  video.play();
-}, false);
-
-kannada.addEventListener("click", function(event) {
-  video.pause();
-  video.setAttribute('src', kanv);
-  video.load();
-  video.play();
-}, false);
-
-telugu.addEventListener("click", function(event) {
-  video.pause();
-  video.setAttribute('src', telv);
-  video.load();
-  video.play();
-}, false);
