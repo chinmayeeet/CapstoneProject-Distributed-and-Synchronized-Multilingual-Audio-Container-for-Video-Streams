@@ -1,0 +1,163 @@
+<!DOCTYPE html>    
+<html>    
+<head>    
+    <title>Audio Upload</title>    
+    <link rel="stylesheet" type="text/css" href="css/AudioUpload.css">    
+</head>    
+<body>    
+
+<div class="header">
+
+  
+  <img class="logo-image" src="images/logo.jpg" />
+  
+
+  <a class="name" href="#">Regional Language AV container</a>
+    
+  <div class="header-right">
+    <a href="#home">Home</a>
+    <a href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\SubjectCatalogue\SubjectCatalogue.html" target="_blank">Subjects</a>
+    <a class="active" href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\AudioUpload\AudioUpload.html" target="_blank">Upload Audio</a> 
+    <a href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\Contact Us\ContactUs.html" target="_blank">Contact Us</a>
+    <a href="#about">About Us</a>
+    <img class="avatar-image" src="images/avatar.png" />
+  </div>
+
+</div>
+
+<div class="video-container">
+    <img src="images/KhanAcadGeometry-Thumbnail.png">
+    <div class="video-text">
+        <a class="video2" href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\VideoPlayer\VideoPlayer.html" target="_blank" >Khan Academy | Recognizing Shapes | Geometry</a>
+        <h6>Uploaded: 5 years ago</h6>
+        
+        <a class="ogVid-link" href="https://www.khanacademy.org/math/cc-2nd-grade-math/x3184e0ec:geometry/cc-2nd-shapes/v/recognizing-shapes" target="_blank">Link to original video</a>
+        <br>
+        <p>Available Languages</p>
+        <ul id="langList">
+            <li><a href="#">Hindi</a> </li>
+            <li><a href="#">Kannada</a> </li>
+            <li><a href="#">Telugu</a> </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="audio-upload">
+    <form>
+        <label for="audio-file"> Select your audio file: </label>
+        <input type="file" name="audio-file"/>
+        <br/><br/>
+        <button id="upload-button" onclick="uploadFile()">Submit</button>
+
+    </form>
+    
+
+</div>
+
+<hr>
+
+<div class="video-container">
+    <img src="images/chemcover.png">
+    <div class="video-text">
+        <a class="video2" href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\VideoPlayer\VideoPlayer2.html" target="_blank" >Khan Academy | Recognizing Shapes | Geometry</a>
+        <h6>Uploaded: 2 years ago</h6>
+        
+        <a class="ogVid-link" href="https://youtu.be/v-Ym4_OqtFk" target="_blank">Link to original video</a>
+        <br>
+        <p>Available Languages</p>
+        <ul id="langList">
+            <li><a href="#">Hindi</a> </li>
+            <li><a href="#">Kannada</a> </li>
+            
+        </ul>
+    </div>
+
+</div>
+
+<div class="audio-upload">
+    <form>
+        <label for="audio-file"> Select your audio file: </label>
+        <input type="file" name="audio-file"/>
+        <br/><br/>
+        <button id="upload-button" onclick="uploadFile()">Submit</button>
+
+    </form>
+    
+
+</div>
+<hr>
+<div class="video-container">
+    <img src="images/biocover.png">
+    <div class="video-text">
+        <a class="video2" href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\VideoPlayer\VideoPlayer3.html" target="_blank" >Intro to Life Processes | Khan Academy | Biology</a>
+        <h6>Uploaded: 3 years ago</h6>
+        
+        <a class="ogVid-link" href="https://www.youtube.com/watch?v=hGSNHbDguE0" target="_blank">Link to original video</a>
+        <br>
+        <p>Available Languages</p>
+        <ul id="langList">
+            <li><a href="#">Hindi</a> </li>
+            <li><a href="#">Kannada</a> </li>
+            
+        </ul>
+    </div>
+
+</div>
+
+<div class="audio-upload">
+    <form>
+        <label for="audio-file"> Select your audio file: </label>
+        <input type="file" name="audio-file"/>
+        <br/><br/>
+        <button id="upload-button" onclick="uploadFile()">Submit</button>
+
+    </form>
+    
+
+</div>
+<hr>
+<div class="video-container">
+    <img src="images/physcover.png">
+    <div class="video-text">
+        <a class="video2" href="C:\Users\Prajna\Desktop\SEM-7\Capstone\FE\VideoPlayer\VideoPlayer4.html" target="_blank" >Khan Academy | Recognizing Shapes | Geometry</a>
+        <h6>Uploaded: 6 years ago</h6>
+        
+        <a class="ogVid-link" href="https://youtu.be/yWMKYID5fr8" target="_blank">Link to original video</a>
+        <br>
+        <p>Available Languages</p>
+        <ul id="langList">
+            <li><a href="#">Hindi</a> </li>
+            <li><a href="#">Kannada</a> </li>
+            
+        </ul>
+    </div>
+
+</div>
+
+<div class="audio-upload">
+    <form>
+        <label for="audio-file"> Select your audio file: </label>
+        <input type="file" name="audio-file"/>
+        <br/><br/>
+        <button id="upload-button" onclick="uploadFile()">Submit</button>
+
+    </form>
+    
+
+</div>
+
+<script>
+    async function uploadFile() {
+        let formData = new FormData(); 
+        formData.append("file", fileupload.files[0]);
+        await fetch('/Upload.php', {
+            method: "POST", 
+            body: formData
+        }); 
+        alert('The file has been uploaded successfully.');
+    }
+</script>
+
+
+</body>
